@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block a %}
+<h1> HELLO</h1>
+    <div>
+    <h3>{{ request.user.username }}</h3>
+    <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+
+<p><br>What chat room would you like to enter?<br/></p>
+    <label>
+    <input id="room-name-input" type="text" size="100"/><br/>
+    <input id="room-name-submit" type="button" value="Enter"/>
+    </label>
+    <script>
+        document.querySelector('#room-name-input').focus();
+        document.querySelector('#room-name-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+
+        document.querySelector('#room-name-submit').onclick = function() {
+            let roomName = document.querySelector('#room-name-input').value;
+            window.location.pathname = '/chat/' + roomName + '/';
+        };
+    </script>
+{% endblock %}

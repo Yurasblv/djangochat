@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block a %}
+<form method="POST">
+        {% csrf_token %}
+    <div>{{ form.username }}
+    <label data-error="Username already taken">Username</label>
+    </div>
+    <div>
+    {{ form.password1 }}
+    <label for="id_password">Password</label>
+    </div>
+    <div>
+    {{ form.password2 }}
+    <label for="id_password2">Repeat Password</label>
+        <div>
+                    <button>Register</button>
+        </div>
+    </div>
+    {% if form.errors %}
+        {% for k,v in form.errors.items %}
+            <ul>
+            {% for i in v %}
+                <li>{{ i }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endif %}
+    </form>
+{% endblock %}
